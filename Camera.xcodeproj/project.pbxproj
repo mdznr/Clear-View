@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C9766C07189D82E3004F9528 /* CoreGraphicsAdditions.c in Sources */ = {isa = PBXBuildFile; fileRef = C9766C06189D82E3004F9528 /* CoreGraphicsAdditions.c */; };
+		C9766C09189D8329004F9528 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9766C08189D8329004F9528 /* QuartzCore.framework */; };
 		C9D4B9171899C471001C4F4F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9D4B9161899C471001C4F4F /* Foundation.framework */; };
 		C9D4B9191899C471001C4F4F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9D4B9181899C471001C4F4F /* CoreGraphics.framework */; };
 		C9D4B91B1899C471001C4F4F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9D4B91A1899C471001C4F4F /* UIKit.framework */; };
@@ -21,6 +23,8 @@
 		C9D4B9381899C471001C4F4F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9D4B91A1899C471001C4F4F /* UIKit.framework */; };
 		C9D4B9401899C471001C4F4F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C9D4B93E1899C471001C4F4F /* InfoPlist.strings */; };
 		C9D4B9421899C471001C4F4F /* CameraTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D4B9411899C471001C4F4F /* CameraTests.m */; };
+		C9D4B94D1899C739001C4F4F /* AVCamPreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D4B94C1899C739001C4F4F /* AVCamPreviewView.m */; };
+		C9D4B973189AA347001C4F4F /* MTZCameraView.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D4B972189AA347001C4F4F /* MTZCameraView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +38,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C9766C05189D8275004F9528 /* CoreGraphicsAdditions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreGraphicsAdditions.h; sourceTree = "<group>"; };
+		C9766C06189D82E3004F9528 /* CoreGraphicsAdditions.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CoreGraphicsAdditions.c; sourceTree = "<group>"; };
+		C9766C08189D8329004F9528 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		C9D4B9131899C471001C4F4F /* Camera.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Camera.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9D4B9161899C471001C4F4F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C9D4B9181899C471001C4F4F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -53,6 +60,10 @@
 		C9D4B93D1899C471001C4F4F /* CameraTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CameraTests-Info.plist"; sourceTree = "<group>"; };
 		C9D4B93F1899C471001C4F4F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C9D4B9411899C471001C4F4F /* CameraTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CameraTests.m; sourceTree = "<group>"; };
+		C9D4B94B1899C739001C4F4F /* AVCamPreviewView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AVCamPreviewView.h; sourceTree = "<group>"; };
+		C9D4B94C1899C739001C4F4F /* AVCamPreviewView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AVCamPreviewView.m; sourceTree = "<group>"; };
+		C9D4B971189AA347001C4F4F /* MTZCameraView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTZCameraView.h; sourceTree = "<group>"; };
+		C9D4B972189AA347001C4F4F /* MTZCameraView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTZCameraView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +71,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C9766C09189D8329004F9528 /* QuartzCore.framework in Frameworks */,
 				C9D4B9191899C471001C4F4F /* CoreGraphics.framework in Frameworks */,
 				C9D4B91B1899C471001C4F4F /* UIKit.framework in Frameworks */,
 				C9D4B9171899C471001C4F4F /* Foundation.framework in Frameworks */,
@@ -101,6 +113,7 @@
 		C9D4B9151899C471001C4F4F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C9766C08189D8329004F9528 /* QuartzCore.framework */,
 				C9D4B9161899C471001C4F4F /* Foundation.framework */,
 				C9D4B9181899C471001C4F4F /* CoreGraphics.framework */,
 				C9D4B91A1899C471001C4F4F /* UIKit.framework */,
@@ -117,6 +130,12 @@
 				C9D4B9281899C471001C4F4F /* Main.storyboard */,
 				C9D4B92B1899C471001C4F4F /* MTZViewController.h */,
 				C9D4B92C1899C471001C4F4F /* MTZViewController.m */,
+				C9D4B94B1899C739001C4F4F /* AVCamPreviewView.h */,
+				C9D4B94C1899C739001C4F4F /* AVCamPreviewView.m */,
+				C9D4B971189AA347001C4F4F /* MTZCameraView.h */,
+				C9D4B972189AA347001C4F4F /* MTZCameraView.m */,
+				C9766C05189D8275004F9528 /* CoreGraphicsAdditions.h */,
+				C9766C06189D82E3004F9528 /* CoreGraphicsAdditions.c */,
 				C9D4B92E1899C471001C4F4F /* Images.xcassets */,
 				C9D4B91D1899C471001C4F4F /* Supporting Files */,
 			);
@@ -200,6 +219,9 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Matt Zanchelli";
 				TargetAttributes = {
+					C9D4B9121899C471001C4F4F = {
+						DevelopmentTeam = 3SZ7MS7NXC;
+					};
 					C9D4B9331899C471001C4F4F = {
 						TestTargetID = C9D4B9121899C471001C4F4F;
 					};
@@ -251,8 +273,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				C9D4B9271899C471001C4F4F /* MTZAppDelegate.m in Sources */,
+				C9766C07189D82E3004F9528 /* CoreGraphicsAdditions.c in Sources */,
 				C9D4B9231899C471001C4F4F /* main.m in Sources */,
+				C9D4B94D1899C739001C4F4F /* AVCamPreviewView.m in Sources */,
 				C9D4B92D1899C471001C4F4F /* MTZViewController.m in Sources */,
+				C9D4B973189AA347001C4F4F /* MTZCameraView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -379,6 +404,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Camera/Camera-Prefix.pch";
 				INFOPLIST_FILE = "Camera/Camera-Info.plist";
@@ -392,6 +418,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Camera/Camera-Prefix.pch";
 				INFOPLIST_FILE = "Camera/Camera-Info.plist";
@@ -459,6 +486,7 @@
 				C9D4B9471899C471001C4F4F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C9D4B9481899C471001C4F4F /* Build configuration list for PBXNativeTarget "CameraTests" */ = {
 			isa = XCConfigurationList;
@@ -467,6 +495,7 @@
 				C9D4B94A1899C471001C4F4F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
