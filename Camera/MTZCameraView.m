@@ -56,7 +56,6 @@
 
 #import "MTZCameraView.h"
 
-#import <AVFoundation/AVFoundation.h>
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "AVCamPreviewView.h"
 #import "CoreGraphicsAdditions.h"
@@ -66,6 +65,7 @@
 static void *CapturingStillImageContext = &CapturingStillImageContext;
 static void *RecordingContext = &RecordingContext;
 static void *SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDeviceAuthorizedContext;
+static void *PreviewLayerConnectionContext = &PreviewLayerConnectionContext;
 
 @interface MTZCameraView ()
 
@@ -125,12 +125,58 @@ static void *SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevice
 {
 	_previewView = [[AVCamPreviewView alloc] initWithFrame:CGRectWithZeroOrigin(self.frame)];
 	_previewView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
+	_previewView.videoGravity = AVLayerVideoGravityResizeAspectFill;
 	[self addSubview:_previewView];
 }
 
+
+#pragma mark - Properties
+
+- (void)setCameraOrientation:(AVCaptureVideoOrientation)cameraOrientation
+{
+	_cameraOrientation = cameraOrientation;
+	
+	if ( [self canSetCameraOrientationNow] ) {
+		[self setCameraOrientationNow:cameraOrientation];
+	} else {
+		[self setCameraOrientationWhenReady:cameraOrientation];
+	}
+}
+
+- (BOOL)canSetCameraOrientationNow
+{
+	return ((AVCaptureVideoPreviewLayer *)self.previewView.layer).connection != nil;
+}
+
+- (void)setCameraOrientationNow:(AVCaptureVideoOrientation)cameraOrientation
+{
+	((AVCaptureVideoPreviewLayer *)self.previewView.layer).connection.videoOrientation = cameraOrientation;
+}
+
+- (void)setCameraOrientationWhenReady:(AVCaptureVideoOrientation)orientation
+{
+	// Watch for connection
+	[self.previewView.layer addObserver:self
+							 forKeyPath:NSStringFromSelector(@selector(connection))
+								options:NSKeyValueObservingOptionNew
+								context:PreviewLayerConnectionContext];
+}
+
+- (void)previewLayersConnectionIsNowReady
+{
+	// Stop observing connection
+	[self.previewView.layer removeObserver:self
+								forKeyPath:NSStringFromSelector(@selector(connection))
+								   context:PreviewLayerConnectionContext];
+	
+	// Set orientation
+	[self setCameraOrientationNow:self.cameraOrientation];
+}
+
+
 #pragma mark - Public API
 
-- (void)loadCam
+- (void)loadCam;
 {
 	// Create the AVCaptureSession
 	AVCaptureSession *session = [[AVCaptureSession alloc] init];
@@ -153,6 +199,7 @@ static void *SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevice
 		
 		AVCaptureDevice *videoDevice = [MTZCameraView deviceWithMediaType:AVMediaTypeVideo
 													   preferringPosition:AVCaptureDevicePositionBack];
+		
 		AVCaptureDeviceInput *videoDeviceInput = [AVCaptureDeviceInput deviceInputWithDevice:videoDevice
 																					   error:&error];
 		
@@ -163,28 +210,6 @@ static void *SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevice
 		if ( [session canAddInput:videoDeviceInput] ) {
 			[session addInput:videoDeviceInput];
 			self.videoDeviceInput = videoDeviceInput;
-		}
-		
-		AVCaptureDevice *audioDevice = [[AVCaptureDevice devicesWithMediaType:AVMediaTypeAudio] firstObject];
-		AVCaptureDeviceInput *audioDeviceInput = [AVCaptureDeviceInput deviceInputWithDevice:audioDevice
-																					   error:&error];
-		
-		if ( !audioDeviceInput ) {
-			NSLog(@"%@", error);
-		}
-		
-		if ( [session canAddInput:audioDeviceInput] ) {
-			[session addInput:audioDeviceInput];
-		}
-		
-		AVCaptureMovieFileOutput *movieFileOutput = [[AVCaptureMovieFileOutput alloc] init];
-		if ( [session canAddOutput:movieFileOutput] ) {
-			[session addOutput:movieFileOutput];
-			AVCaptureConnection *connection = [movieFileOutput connectionWithMediaType:AVMediaTypeVideo];
-			if ( connection.supportsVideoStabilization ) {
-				connection.enablesVideoStabilizationWhenAvailable = YES;
-			}
-			self.movieFileOutput = movieFileOutput;
 		}
 		
 		AVCaptureStillImageOutput *stillImageOutput = [[AVCaptureStillImageOutput alloc] init];
@@ -234,7 +259,7 @@ static void *SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevice
 - (void)didDisappear
 {
 	dispatch_async([self sessionQueue], ^{
-		[[self session] stopRunning];
+		[self.session stopRunning];
 		
 		[[NSNotificationCenter defaultCenter] removeObserver:self
 														name:AVCaptureDeviceSubjectAreaDidChangeNotification
@@ -258,7 +283,21 @@ static void *SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevice
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 {
-	((AVCaptureVideoPreviewLayer *)self.previewView.layer).connection.videoOrientation = (AVCaptureVideoOrientation)toInterfaceOrientation;
+	self.cameraOrientation = (AVCaptureVideoOrientation) toInterfaceOrientation;
+}
+
+- (void)focusOnPoint:(CGPoint)point
+{
+	CGPoint devicePoint = [(AVCaptureVideoPreviewLayer *)self.previewView.layer captureDevicePointOfInterestForPoint:point];
+	[self focusWithMode:AVCaptureFocusModeAutoFocus
+		 exposeWithMode:AVCaptureExposureModeAutoExpose
+		  atDevicePoint:devicePoint
+monitorSubjectAreaChange:NO];
+}
+
+- (void)takePhoto
+{
+	[self snapStillImage:self];
 }
 
 
@@ -270,7 +309,31 @@ static void *SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevice
 }
 
 
-#pragma mark Actions
+#pragma mark - Observers
+
+- (void)observeValueForKeyPath:(NSString *)keyPath
+					  ofObject:(id)object
+						change:(NSDictionary *)change
+					   context:(void *)context
+{
+	if ( context == CapturingStillImageContext ) {
+		BOOL isCapturingStillImage = [change[NSKeyValueChangeNewKey] boolValue];
+		
+		if ( isCapturingStillImage ) {
+			//[self runStillImageCaptureAnimation];
+		}
+	} else if ( context == RecordingContext ) {
+//		BOOL isRecording = [change[NSKeyValueChangeNewKey] boolValue];
+	} else if ( context == SessionRunningAndDeviceAuthorizedContext ) {
+//		BOOL isRunning = [change[NSKeyValueChangeNewKey] boolValue];
+	} else if ( context == PreviewLayerConnectionContext ) {
+		[self previewLayersConnectionIsNowReady];
+	} else {
+		[super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+	}
+}
+
+#pragma mark - Actions
 
 - (IBAction)snapStillImage:(id)sender
 {
@@ -294,15 +357,6 @@ static void *SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevice
 	});
 }
 
-- (IBAction)focusAndExposeTap:(UIGestureRecognizer *)gestureRecognizer
-{
-	CGPoint devicePoint = [(AVCaptureVideoPreviewLayer *)self.previewView.layer captureDevicePointOfInterestForPoint:[gestureRecognizer locationInView:gestureRecognizer.view]];
-	[self focusWithMode:AVCaptureFocusModeAutoFocus
-		 exposeWithMode:AVCaptureExposureModeAutoExpose
-		  atDevicePoint:devicePoint
-monitorSubjectAreaChange:YES];
-}
-
 - (void)subjectAreaDidChange:(NSNotification *)notification
 {
 	CGPoint devicePoint = CGPointMake(.5, .5);
@@ -311,6 +365,7 @@ monitorSubjectAreaChange:YES];
 		  atDevicePoint:devicePoint
 monitorSubjectAreaChange:NO];
 }
+
 
 #pragma mark -
 
@@ -336,6 +391,7 @@ monitorSubjectAreaChange:NO];
 	}];
 }
 
+
 #pragma mark Device Configuration
 
 - (void)focusWithMode:(AVCaptureFocusMode)focusMode
@@ -344,7 +400,7 @@ monitorSubjectAreaChange:NO];
 monitorSubjectAreaChange:(BOOL)monitorSubjectAreaChange
 {
 	dispatch_async([self sessionQueue], ^{
-		AVCaptureDevice *device = [[self videoDeviceInput] device];
+		AVCaptureDevice *device = self.videoDeviceInput.device;
 		NSError *error = nil;
 		if ( [device lockForConfiguration:&error] ) {
 			if ( device.isFocusPointOfInterestSupported && [device isFocusModeSupported:focusMode] ) {
@@ -355,7 +411,7 @@ monitorSubjectAreaChange:(BOOL)monitorSubjectAreaChange
 				device.exposureMode = exposureMode;
 				device.exposurePointOfInterest = point;
 			}
-			[device setSubjectAreaChangeMonitoringEnabled:monitorSubjectAreaChange];
+			device.subjectAreaChangeMonitoringEnabled = monitorSubjectAreaChange;
 			[device unlockForConfiguration];
 		} else {
 			NSLog(@"%@", error);

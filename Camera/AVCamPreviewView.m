@@ -55,14 +55,30 @@
 	return [AVCaptureVideoPreviewLayer class];
 }
 
+
+#pragma mark Session
+
 - (AVCaptureSession *)session
 {
-	return [(AVCaptureVideoPreviewLayer *)[self layer] session];
+	return ((AVCaptureVideoPreviewLayer *) self.layer).session;
 }
 
 - (void)setSession:(AVCaptureSession *)session
 {
-	[(AVCaptureVideoPreviewLayer *)[self layer] setSession:session];
+	((AVCaptureVideoPreviewLayer *) self.layer).session = session;
+}
+
+
+#pragma mark Video Gravity
+
+- (void)setVideoGravity:(NSString *)videoGravity
+{
+	((AVCaptureVideoPreviewLayer *) self.layer).videoGravity = videoGravity;
+}
+
+- (NSString *)videoGravity
+{
+	return ((AVCaptureVideoPreviewLayer *) self.layer).videoGravity;
 }
 
 @end

@@ -28,6 +28,7 @@
 	
 	_cameraView.delegate = self;
 	[_cameraView loadCam];
+	_cameraView.cameraOrientation = (AVCaptureVideoOrientation) self.interfaceOrientation;
 	
 	// Load UI on left, right, or bottom side depending on preference
 	// Link to open this app from Keynote? (Tap on "Demo")?
@@ -38,6 +39,11 @@
 {
 	[super viewWillAppear:animated];
 	[_cameraView willAppear];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+	[super viewDidAppear:animated];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -57,6 +63,7 @@
 {
 	NSLog(@"Did Tap");
 	// Focus (and lock) on tapped region
+	[_cameraView focusOnPoint:[sender locationInView:_cameraView]];
 }
 
 - (IBAction)didLongPress:(UILongPressGestureRecognizer *)sender

@@ -53,4 +53,9 @@
 
 @property (nonatomic) AVCaptureSession *session;
 
+/// Indicates how the video is displayed within a player layer’s bounds rect.
+/// @discussion Options are AVLayerVideoGravityResizeAspect, AVLayerVideoGravityResizeAspectFill and AVLayerVideoGravityResize. The default is AVLayerVideoGravityResizeAspect.
+/// @discussion This property is animatable.
+@property (copy) NSString *videoGravity;
+
 @end
