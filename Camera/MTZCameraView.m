@@ -132,14 +132,14 @@ static void *PreviewLayerConnectionContext = &PreviewLayerConnectionContext;
 
 #pragma mark - Properties
 
-- (void)setCameraOrientation:(AVCaptureVideoOrientation)cameraOrientation
+- (void)setCameraOrientation:(UIInterfaceOrientation)cameraOrientation
 {
 	_cameraOrientation = cameraOrientation;
 	
 	if ( [self canSetCameraOrientationNow] ) {
 		[self setCameraOrientationNow:cameraOrientation];
 	} else {
-		[self setCameraOrientationWhenReady:cameraOrientation];
+		[self setCameraOrientationWhenReady];
 	}
 }
 
@@ -148,12 +148,12 @@ static void *PreviewLayerConnectionContext = &PreviewLayerConnectionContext;
 	return ((AVCaptureVideoPreviewLayer *)self.previewView.layer).connection != nil;
 }
 
-- (void)setCameraOrientationNow:(AVCaptureVideoOrientation)cameraOrientation
+- (void)setCameraOrientationNow:(UIInterfaceOrientation)cameraOrientation
 {
-	((AVCaptureVideoPreviewLayer *)self.previewView.layer).connection.videoOrientation = cameraOrientation;
+	((AVCaptureVideoPreviewLayer *)self.previewView.layer).connection.videoOrientation = (AVCaptureVideoOrientation)cameraOrientation;
 }
 
-- (void)setCameraOrientationWhenReady:(AVCaptureVideoOrientation)orientation
+- (void)setCameraOrientationWhenReady
 {
 	// Watch for connection
 	[self.previewView.layer addObserver:self
@@ -283,7 +283,7 @@ static void *PreviewLayerConnectionContext = &PreviewLayerConnectionContext;
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 {
-	self.cameraOrientation = (AVCaptureVideoOrientation) toInterfaceOrientation;
+	self.cameraOrientation = toInterfaceOrientation;
 }
 
 - (void)focusOnPoint:(CGPoint)point

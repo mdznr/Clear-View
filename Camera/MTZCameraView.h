@@ -33,7 +33,7 @@
 
 /// The orientation of the camera.
 #warning AVCaptureVideoOrientation or UIInterfaceOrientation?
-@property (nonatomic) AVCaptureVideoOrientation cameraOrientation;
+@property (nonatomic) UIInterfaceOrientation cameraOrientation;
 
 
 #pragma mark -

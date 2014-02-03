@@ -28,7 +28,7 @@
 	
 	_cameraView.delegate = self;
 	[_cameraView loadCam];
-	_cameraView.cameraOrientation = (AVCaptureVideoOrientation) self.interfaceOrientation;
+	_cameraView.cameraOrientation = self.interfaceOrientation;
 	
 	// Load UI on left, right, or bottom side depending on preference
 	// Link to open this app from Keynote? (Tap on "Demo")?
@@ -56,6 +56,7 @@
 {
 	[_cameraView willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation];
 }
+
 
 #pragma mark - Gesture Recognizers
 
