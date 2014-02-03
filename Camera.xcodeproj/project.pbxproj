@@ -41,7 +41,7 @@
 		C9766C05189D8275004F9528 /* CoreGraphicsAdditions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreGraphicsAdditions.h; sourceTree = "<group>"; };
 		C9766C06189D82E3004F9528 /* CoreGraphicsAdditions.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CoreGraphicsAdditions.c; sourceTree = "<group>"; };
 		C9766C08189D8329004F9528 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		C9D4B9131899C471001C4F4F /* Camera.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Camera.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C9D4B9131899C471001C4F4F /* Clear View.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Clear View.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9D4B9161899C471001C4F4F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C9D4B9181899C471001C4F4F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		C9D4B91A1899C471001C4F4F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -104,7 +104,7 @@
 		C9D4B9141899C471001C4F4F /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C9D4B9131899C471001C4F4F /* Camera.app */,
+				C9D4B9131899C471001C4F4F /* Clear View.app */,
 				C9D4B9341899C471001C4F4F /* CameraTests.xctest */,
 			);
 			name = Products;
@@ -188,7 +188,7 @@
 			);
 			name = "Clear View";
 			productName = Camera;
-			productReference = C9D4B9131899C471001C4F4F /* Camera.app */;
+			productReference = C9D4B9131899C471001C4F4F /* Clear View.app */;
 			productType = "com.apple.product-type.application";
 		};
 		C9D4B9331899C471001C4F4F /* CameraTests */ = {
