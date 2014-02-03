@@ -21,14 +21,15 @@
       "scale" : "2x"
     },
     {
-      "idiom" : "ipad",
       "size" : "76x76",
+      "idiom" : "ipad",
+      "filename" : "Eye.png",
       "scale" : "1x"
     },
     {
       "size" : "76x76",
       "idiom" : "ipad",
-      "filename" : "badicon.png",
+      "filename" : "Eye@2x.png",
       "scale" : "2x"
     }
   ],

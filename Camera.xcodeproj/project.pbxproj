@@ -174,9 +174,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		C9D4B9121899C471001C4F4F /* Camera */ = {
+		C9D4B9121899C471001C4F4F /* Clear View */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C9D4B9451899C471001C4F4F /* Build configuration list for PBXNativeTarget "Camera" */;
+			buildConfigurationList = C9D4B9451899C471001C4F4F /* Build configuration list for PBXNativeTarget "Clear View" */;
 			buildPhases = (
 				C9D4B90F1899C471001C4F4F /* Sources */,
 				C9D4B9101899C471001C4F4F /* Frameworks */,
@@ -186,7 +186,7 @@
 			);
 			dependencies = (
 			);
-			name = Camera;
+			name = "Clear View";
 			productName = Camera;
 			productReference = C9D4B9131899C471001C4F4F /* Camera.app */;
 			productType = "com.apple.product-type.application";
@@ -240,7 +240,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				C9D4B9121899C471001C4F4F /* Camera */,
+				C9D4B9121899C471001C4F4F /* Clear View */,
 				C9D4B9331899C471001C4F4F /* CameraTests */,
 			);
 		};
@@ -294,7 +294,7 @@
 /* Begin PBXTargetDependency section */
 		C9D4B93A1899C471001C4F4F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = C9D4B9121899C471001C4F4F /* Camera */;
+			target = C9D4B9121899C471001C4F4F /* Clear View */;
 			targetProxy = C9D4B9391899C471001C4F4F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -479,7 +479,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C9D4B9451899C471001C4F4F /* Build configuration list for PBXNativeTarget "Camera" */ = {
+		C9D4B9451899C471001C4F4F /* Build configuration list for PBXNativeTarget "Clear View" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C9D4B9461899C471001C4F4F /* Debug */,

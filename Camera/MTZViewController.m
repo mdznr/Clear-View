@@ -52,9 +52,10 @@
 	[_cameraView didDisappear];
 }
 
-- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+								duration:(NSTimeInterval)duration
 {
-	[_cameraView willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation];
+	[_cameraView willRotateToInterfaceOrientation:toInterfaceOrientation];
 }
 
 
