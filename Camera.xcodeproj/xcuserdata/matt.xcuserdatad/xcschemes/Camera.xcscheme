@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "C9D4B9121899C471001C4F4F"
-               BuildableName = "Camera.app"
+               BuildableName = "Clear View.app"
                BlueprintName = "Clear View"
                ReferencedContainer = "container:Camera.xcodeproj">
             </BuildableReference>
@@ -43,7 +43,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "C9D4B9121899C471001C4F4F"
-            BuildableName = "Camera.app"
+            BuildableName = "Clear View.app"
             BlueprintName = "Clear View"
             ReferencedContainer = "container:Camera.xcodeproj">
          </BuildableReference>
@@ -62,7 +62,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "C9D4B9121899C471001C4F4F"
-            BuildableName = "Camera.app"
+            BuildableName = "Clear View.app"
             BlueprintName = "Clear View"
             ReferencedContainer = "container:Camera.xcodeproj">
          </BuildableReference>
@@ -80,7 +80,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "C9D4B9121899C471001C4F4F"
-            BuildableName = "Camera.app"
+            BuildableName = "Clear View.app"
             BlueprintName = "Clear View"
             ReferencedContainer = "container:Camera.xcodeproj">
          </BuildableReference>
